@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Customers Directory — ClientFlow CRM</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <div class="app-container">
+    <div id="sidebar-overlay" class="sidebar-overlay"></div>
+
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar">
+      <div class="sidebar-brand">
+        <div class="brand-icon">CF</div>
+        <div class="brand-name">Client<span>Flow</span></div>
+      </div>
+
+      <nav class="sidebar-nav">
+        <div class="nav-section-title">Menu</div>
+        <a href="dashboard.html" class="nav-item" data-page="dashboard">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+          <span>Dashboard</span>
+        </a>
+        <a href="leads.html" class="nav-item" data-page="leads">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+          <span>Leads</span>
+          <span id="sidebar-leads-badge" class="nav-badge">0</span>
+        </a>
+        <a href="customers.html" class="nav-item active" data-page="customers">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+          <span>Customers</span>
+        </a>
+        <a href="pipeline.html" class="nav-item" data-page="pipeline">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>
+          <span>Pipeline</span>
+        </a>
+        <a href="followups.html" class="nav-item" data-page="followups">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="9 11 12 14 22 4"></polyline><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path></svg>
+          <span>Follow-ups</span>
+          <span id="sidebar-tasks-badge" class="nav-badge">0</span>
+        </a>
+        <a href="reports.html" class="nav-item" data-page="reports">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line><line x1="2" y1="20" x2="22" y2="20"></line></svg>
+          <span>Reports</span>
+        </a>
+
+        <div class="nav-section-title" style="margin-top:1rem;">Tools</div>
+        <button type="button" id="btn-reset-data" class="nav-item" style="width:100%; border:none; background:none; text-align:left; cursor:pointer;">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="1 4 1 10 7 10"></polyline><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"></path></svg>
+          <span>Reset Demo Data</span>
+        </button>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="user-profile">
+          <div id="sidebar-user-avatar" class="user-avatar">A</div>
+          <div class="user-info">
+            <div id="sidebar-user-name" class="user-name">Administrator</div>
+            <div id="sidebar-user-role" class="user-role">admin@clientflow.com</div>
+          </div>
+        </div>
+        <button type="button" id="btn-logout" class="btn-logout">
+          <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>
+          <span>Sign Out</span>
+        </button>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-wrapper">
+      <header class="top-header">
+        <div class="header-left">
+          <button id="mobile-sidebar-toggle" class="mobile-toggle">
+            <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+          </button>
+          <h1 class="page-title">Existing Customers</h1>
+        </div>
+
+        <div class="header-actions">
+          <button id="btn-add-customer" class="btn btn-primary btn-sm">
+            <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+            <span>Add Customer</span>
+          </button>
+        </div>
+      </header>
+
+      <div class="content-body">
+        <!-- Search Bar -->
+        <div class="filter-bar">
+          <div class="search-input-group">
+            <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+            <input type="text" id="customer-search" class="search-input" placeholder="Search customers by name, company, email...">
+          </div>
+          <div class="filter-actions">
+            <span id="customers-count-badge" class="badge badge-won" style="font-size:0.8125rem;">0 customers</span>
+          </div>
+        </div>
+
+        <!-- Customers Table -->
+        <div class="table-responsive">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Customer Name</th>
+                <th>Company & Phone</th>
+                <th>Office Address</th>
+                <th>Associated Deals</th>
+                <th>Customer Since</th>
+                <th style="width:140px;">Actions</th>
+              </tr>
+            </thead>
+            <tbody id="customers-table-body">
+              <!-- Dynamically populated -->
+            </tbody>
+          </table>
+
+          <div id="customers-empty-state" class="empty-state" style="display:none;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
+            <p class="empty-state-title">No customers found</p>
+            <p class="empty-state-text">Convert leads or add new customer profiles directly.</p>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- Add/Edit Customer Modal -->
+  <div id="customer-modal-backdrop" class="modal-backdrop">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <h2 id="customer-modal-title" class="modal-title">Add Customer</h2>
+        <button type="button" id="btn-close-cust-modal" class="modal-close">&times;</button>
+      </div>
+      <form id="customer-form">
+        <div class="modal-body">
+          <input type="hidden" id="cust-id">
+
+          <div class="form-grid">
+            <div class="form-group">
+              <label for="cust-name" class="form-label">Contact Name <span class="req">*</span></label>
+              <input type="text" id="cust-name" class="form-control" placeholder="e.g. Vikram Malhotra" required>
+            </div>
+
+            <div class="form-group">
+              <label for="cust-company" class="form-label">Company Name <span class="req">*</span></label>
+              <input type="text" id="cust-company" class="form-control" placeholder="e.g. BlueWave Corp" required>
+            </div>
+
+            <div class="form-group">
+              <label for="cust-email" class="form-label">Email Address</label>
+              <input type="email" id="cust-email" class="form-control" placeholder="vikram@bluewave.com">
+            </div>
+
+            <div class="form-group">
+              <label for="cust-phone" class="form-label">Phone Number</label>
+              <input type="tel" id="cust-phone" class="form-control" placeholder="+91 98765 00000">
+            </div>
+
+            <div class="form-group form-group-full">
+              <label for="cust-address" class="form-label">Office / Billing Address</label>
+              <input type="text" id="cust-address" class="form-control" placeholder="e.g. Cyber City, Sector 24, Gurugram">
+            </div>
+
+            <div class="form-group form-group-full">
+              <label for="cust-notes" class="form-label">Customer Profile Notes</label>
+              <textarea id="cust-notes" class="form-control" placeholder="General preferences, account details, key stakeholders..."></textarea>
+            </div>
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" id="btn-cancel-cust-modal" class="btn btn-secondary btn-sm">Cancel</button>
+          <button type="submit" class="btn btn-primary btn-sm">Save Customer</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="js/storage.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/customers.js"></script>
+</body>
+</html>

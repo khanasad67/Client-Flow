@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login — ClientFlow CRM</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="login-body">
+
+  <div class="login-card">
+    <div class="login-header">
+      <div class="login-logo">CF</div>
+      <h1 class="login-title">Client<span>Flow</span></h1>
+      <p class="login-subtitle">Simple, Modern Customer Relationship Management</p>
+    </div>
+
+    <!-- Demo Credentials Quick-Fill Banner
+    <div class="demo-credentials-box">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.35rem;">
+        <strong>Demo Login Credentials</strong>
+        <button type="button" id="btn-fill-demo" class="btn btn-secondary btn-sm" style="padding: 2px 8px; font-size: 0.75rem;">Auto-Fill</button>
+      </div>
+      <div style="color:var(--text-muted);">Email: <code style="color:var(--primary); font-weight:600;">admin@clientflow.com</code></div>
+      <div style="color:var(--text-muted);">Password: <code style="color:var(--primary); font-weight:600;">admin123</code></div>
+    </div> -->
+
+    <!-- Error Alert Message -->
+    <div id="login-error" style="display:none; background:var(--status-lost-bg); border:1px solid #fca5a5; color:var(--status-lost); padding:0.75rem; border-radius:var(--radius-sm); font-size:0.8125rem; margin-bottom:1rem;"></div>
+
+    <form id="login-form">
+      <div class="form-group" style="margin-bottom:1rem;">
+        <label for="login-email" class="form-label">Email or Username <span class="req">*</span></label>
+        <input type="text" id="login-email" class="form-control" placeholder="name@company.com" required autocomplete="username">
+      </div>
+
+      <div class="form-group" style="margin-bottom:1.5rem;">
+        <label for="login-password" class="form-label">Password <span class="req">*</span></label>
+        <input type="password" id="login-password" class="form-control" placeholder="••••••••" required autocomplete="current-password">
+      </div>
+
+      <button type="submit" class="btn btn-primary" style="width:100%; padding:0.75rem;">
+        Sign In to Workspace
+      </button>
+    </form>
+
+    <div style="margin-top:1.5rem; text-align:center; font-size:0.75rem; color:var(--text-subtle);">
+      Made By Asad Khan
+    </div>
+  </div>
+
+  <script src="js/storage.js"></script>
+  <script src="js/app.js"></script>
+  <script>
+  document.addEventListener('DOMContentLoaded', () => {
+    // If already authenticated, redirect straight to dashboard
+    if (Storage.getAuth()) {
+      window.location.href = 'dashboard.html';
+      return;
+    }
+
+    const emailInput = document.getElementById('login-email');
+    const passInput = document.getElementById('login-password');
+    const form = document.getElementById('login-form');
+    const errBox = document.getElementById('login-error');
+
+    // Login form
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      const email = emailInput.value.trim();
+      const password = passInput.value.trim();
+
+      if (!email || !password) {
+        errBox.textContent = 'Please enter both email and password.';
+        errBox.style.display = 'block';
+        return;
+      }
+
+      // Demo credential validation
+      if (email.toLowerCase() === 'admin@clientflow.com' && password !== 'admin123') {
+        errBox.textContent = 'Invalid credentials for demo account. Password is: admin123';
+        errBox.style.display = 'block';
+        return;
+      }
+
+      // Store simulated session
+      Storage.setAuth({
+        name: email.split('@')[0].replace('.', ' ').toUpperCase(),
+        email: email,
+        role: 'CRM Administrator'
+      });
+
+      // Redirect
+      window.location.href = 'dashboard.html';
+    });
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,16 @@
+{
+  "name": "clientflow-crm",
+  "version": "1.0.0",
+  "description": "Simple, modern, fully functional CRM website for small businesses - College Mini Project",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "keywords": ["crm", "clientflow", "javascript", "nodejs", "express", "mini-project"],
+  "author": "Computer Science Student",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.19.2"
+  }
+}

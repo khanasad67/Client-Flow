@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Customer 360° Profile — ClientFlow CRM</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <div class="app-container">
+    <div id="sidebar-overlay" class="sidebar-overlay"></div>
+
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar">
+      <div class="sidebar-brand">
+        <div class="brand-icon">CF</div>
+        <div class="brand-name">Client<span>Flow</span></div>
+      </div>
+
+      <nav class="sidebar-nav">
+        <div class="nav-section-title">Menu</div>
+        <a href="dashboard.html" class="nav-item" data-page="dashboard">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+          <span>Dashboard</span>
+        </a>
+        <a href="leads.html" class="nav-item" data-page="leads">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+          <span>Leads</span>
+          <span id="sidebar-leads-badge" class="nav-badge">0</span>
+        </a>
+        <a href="customers.html" class="nav-item active" data-page="customers">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+          <span>Customers</span>
+        </a>
+        <a href="pipeline.html" class="nav-item" data-page="pipeline">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>
+          <span>Pipeline</span>
+        </a>
+        <a href="followups.html" class="nav-item" data-page="followups">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="9 11 12 14 22 4"></polyline><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path></svg>
+          <span>Follow-ups</span>
+          <span id="sidebar-tasks-badge" class="nav-badge">0</span>
+        </a>
+        <a href="reports.html" class="nav-item" data-page="reports">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line><line x1="2" y1="20" x2="22" y2="20"></line></svg>
+          <span>Reports</span>
+        </a>
+
+        <div class="nav-section-title" style="margin-top:1rem;">Tools</div>
+        <button type="button" id="btn-reset-data" class="nav-item" style="width:100%; border:none; background:none; text-align:left; cursor:pointer;">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="1 4 1 10 7 10"></polyline><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"></path></svg>
+          <span>Reset Demo Data</span>
+        </button>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="user-profile">
+          <div id="sidebar-user-avatar" class="user-avatar">A</div>
+          <div class="user-info">
+            <div id="sidebar-user-name" class="user-name">Administrator</div>
+            <div id="sidebar-user-role" class="user-role">admin@clientflow.com</div>
+          </div>
+        </div>
+        <button type="button" id="btn-logout" class="btn-logout">
+          <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>
+          <span>Sign Out</span>
+        </button>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-wrapper">
+      <header class="top-header">
+        <div class="header-left">
+          <button id="mobile-sidebar-toggle" class="mobile-toggle">
+            <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+          </button>
+          <a href="customers.html" style="display:inline-flex; align-items:center; gap:0.35rem; color:var(--text-muted); font-size:0.875rem; font-weight:600; margin-right:0.75rem;">
+            &larr; Customers
+          </a>
+          <h1 id="cust-header-name" class="page-title" style="display:inline;">Customer Name</h1>
+          <span id="cust-header-company" class="badge badge-won" style="margin-left:0.5rem;">Company</span>
+        </div>
+
+        <div class="header-actions">
+          <button id="btn-add-interaction" class="btn btn-primary btn-sm">
+            <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+            <span>+ Log Interaction</span>
+          </button>
+        </div>
+      </header>
+
+      <div class="content-body">
+        <div class="customer-profile-grid">
+          
+          <!-- Left Column: Profile Card -->
+          <div class="card" style="position:sticky; top:88px;">
+            <div style="text-align:center; padding-bottom:1.25rem; border-bottom:1px solid var(--border-color); margin-bottom:1.25rem;">
+              <div id="cust-avatar-initial" style="width:64px; height:64px; border-radius:50%; background:var(--primary-light); color:var(--primary); font-size:1.75rem; font-weight:700; display:flex; align-items:center; justify-content:center; margin:0 auto 0.75rem;">
+                C
+              </div>
+              <h2 id="profile-name" style="font-size:1.2rem; font-weight:700; color:var(--text-main);">Customer</h2>
+              <p id="profile-company" style="font-size:0.875rem; color:var(--text-muted);">Company</p>
+            </div>
+
+            <div style="display:flex; flex-direction:column; gap:0.875rem; font-size:0.875rem;">
+              <div>
+                <span style="font-size:0.75rem; text-transform:uppercase; font-weight:700; color:var(--text-subtle);">Email</span>
+                <div id="profile-email" style="font-weight:500; color:var(--text-main);">—</div>
+              </div>
+
+              <div>
+                <span style="font-size:0.75rem; text-transform:uppercase; font-weight:700; color:var(--text-subtle);">Phone</span>
+                <div id="profile-phone" style="font-weight:500; color:var(--text-main);">—</div>
+              </div>
+
+              <div>
+                <span style="font-size:0.75rem; text-transform:uppercase; font-weight:700; color:var(--text-subtle);">Address</span>
+                <div id="profile-address" style="font-weight:500; color:var(--text-main); line-height:1.4;">—</div>
+              </div>
+
+              <div>
+                <span style="font-size:0.75rem; text-transform:uppercase; font-weight:700; color:var(--text-subtle);">Client Since</span>
+                <div id="profile-created" style="font-weight:500; color:var(--text-main);">—</div>
+              </div>
+
+              <div style="border-top:1px solid var(--border-light); padding-top:0.75rem;">
+                <span style="font-size:0.75rem; text-transform:uppercase; font-weight:700; color:var(--text-subtle);">Account Notes</span>
+                <p id="profile-notes" style="font-size:0.8125rem; color:var(--text-muted); margin-top:0.25rem; line-height:1.5;">—</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right Column: Interaction History, Deals, and Follow-ups -->
+          <div style="display:flex; flex-direction:column; gap:1.5rem;">
+            
+            <!-- Section 1: Interaction History -->
+            <div class="card">
+              <div class="card-header">
+                <h3 class="card-title">Customer Interaction Timeline</h3>
+                <button type="button" class="btn btn-secondary btn-sm" onclick="document.getElementById('btn-add-interaction').click()">
+                  + Log Call/Meeting
+                </button>
+              </div>
+              <div id="interaction-timeline-container" class="timeline">
+                <!-- Dynamically populated timeline entries -->
+              </div>
+            </div>
+
+            <!-- Section 2: Associated Pipeline Deals -->
+            <div class="card">
+              <div class="card-header">
+                <h3 class="card-title">Current & Past Deals</h3>
+                <a href="pipeline.html" class="btn btn-secondary btn-sm">View Pipeline</a>
+              </div>
+              <div id="cust-deals-list">
+                <!-- Dynamically populated deals -->
+              </div>
+            </div>
+
+            <!-- Section 3: Follow-up Tasks -->
+            <div class="card">
+              <div class="card-header">
+                <h3 class="card-title">Pending Follow-ups</h3>
+                <button id="btn-add-cust-task" class="btn btn-secondary btn-sm">+ Add Follow-up</button>
+              </div>
+              <div id="cust-tasks-list">
+                <!-- Dynamically populated tasks -->
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- Log Interaction Modal -->
+  <div id="interaction-modal-backdrop" class="modal-backdrop">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <h2 class="modal-title">Log Customer Interaction</h2>
+        <button type="button" id="btn-close-int-modal" class="modal-close">&times;</button>
+      </div>
+      <form id="interaction-form">
+        <div class="modal-body">
+          <div class="form-grid">
+            <div class="form-group">
+              <label for="int-type" class="form-label">Interaction Type <span class="req">*</span></label>
+              <select id="int-type" class="form-control" required>
+                <option value="Call">Phone Call</option>
+                <option value="Meeting">Meeting / Demo</option>
+                <option value="Email">Email Communication</option>
+                <option value="Note">General Note</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="int-date" class="form-label">Date</label>
+              <input type="date" id="int-date" class="form-control">
+            </div>
+
+            <div class="form-group form-group-full">
+              <label for="int-notes" class="form-label">Discussion Notes & Outcome <span class="req">*</span></label>
+              <textarea id="int-notes" class="form-control" placeholder="e.g. Called customer about product demo. Customer requested a follow-up next week regarding enterprise tier pricing..." required></textarea>
+            </div>
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" id="btn-cancel-int-modal" class="btn btn-secondary btn-sm">Cancel</button>
+          <button type="submit" class="btn btn-primary btn-sm">Log Interaction</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="js/storage.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/customer-detail.js"></script>
+</body>
+</html>
